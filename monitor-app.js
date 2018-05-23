@@ -94,7 +94,7 @@
 
   function refreshServices() {
     services.forEach(service => {
-      fetch(service.url + "monitor/usage").then(stat => stat.json()).then(stat => {
+      fetch(service.url + "/usage").then(stat => stat.json()).then(stat => {
         updateStat(service, statPrettyPrint(stat), true);
       }).catch(e => updateStat(service, e, false));
     })

@@ -1,0 +1,21 @@
+{
+  "name": "express-active-monitor",
+  "version": "1.0.0",
+  "description": "Node.js Express Server monitor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plehegar/express-monitor.git"
+  },
+  "author": "plh@w3.org",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/plehegar/express-monitor/issues"
+  },
+  "homepage": "https://github.com/plehegar/express-monitor#readme",
+  "dependencies": {
+  }
+}

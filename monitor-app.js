@@ -52,7 +52,6 @@
     var frag = document.createDocumentFragment();
     var div = frag.appendChild(document.createElement("div"));
     div.appendChild(document.createElement("h2")).textContent = service.url;
-    div.appendChild(document.createElement("h2")).textContent = service.url;
     let anchor = div.appendChild(document.createElement("p"));
     anchor.innerHTML = "<a href='" + service.url + "/logs'>logs</a>"
      + ", <a href='" + service.url + "/usage'>usage</a>"

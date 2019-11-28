@@ -28,15 +28,39 @@
     window.addEventListener("load", e => params.get("services").split(';').forEach(s => addURL(s)));
   }
 
+  function nudge(url) {
+    fetch(url + "/../docs/nudge").then(res => {
+      if (res.ok) {
+        fetch(url + '/../nudge', {
+          method: 'POST',
+          mode: 'same-origin',
+          cache: 'no-cache',
+          credentials: 'omit',
+          headers: {
+           'Content-Type': 'application/json'
+          },
+          redirect: 'error',
+          referrer: 'no-referrer',
+          body: JSON.stringify({nudge: true })
+        })
+      }
+    });
+  }
+
   function createStat(service) {
     var body = document.getElementById("services");
     var frag = document.createDocumentFragment();
     var div = frag.appendChild(document.createElement("div"));
     div.appendChild(document.createElement("h2")).textContent = service.url;
-    var p = div.appendChild(document.createElement("p")).appendChild(document.createElement("span"));
-    p.textContent = "OK";
-    p.style = "color: white; font-weight: bold; padding: 0.5ex;"
-    p.id = "service-" + service.id;
+    div.appendChild(document.createElement("h2")).textContent = service.url;
+    let anchor = div.appendChild(document.createElement("p"));
+    anchor.innerHTML = "<a href='" + service.url + "/logs'>logs</a>"
+     + ", <a href='" + service.url + "/usage'>usage</a>"
+     + ", <a href='"+service.url+"/../doc/nudge'>nudge</a>";
+    let span = div.appendChild(document.createElement("p")).appendChild(document.createElement("span"));
+    span.textContent = "OK";
+    span.style = "color: white; font-weight: bold; padding: 0.5ex;"
+    span.id = "service-" + service.id;
     body.appendChild(frag);
   }
   var canNotify = (Notification.permission === "granted");
@@ -88,6 +112,8 @@
     var ret = "uptime: " + formatSeconds(stat.uptime);
     if (stat.requests !== undefined) {
       ret += " total requests: " + stat.requests.total;
+      ret += " total errors: " + stat.requests.errors;
+      ret += " total warnings: " + stat.requests.warnings;
     }
     return ret;
   }
@@ -103,4 +129,5 @@
   // set up
   window.monitor = {};
   window.monitor.addURL = addURL;
+  window.monitor.nudge = nudge;
 })();

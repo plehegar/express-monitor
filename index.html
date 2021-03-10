@@ -4,8 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://d3js.org/d3.v6.min.js"></script>
   <title>Monitor</title>
+<style>
+  .x.axis line {
+  shape-rendering: auto;
+}
 
+.line, rect {
+  fill: none;
+  stroke-width: 1.5px;
+}
+rect {
+  stroke: #888;
+}
+
+text.title {
+  font-size: 16px;
+  font-weight: 300;
+}
+</style>
   <script src="monitor-app.js"></script>
 </head>
 <body>

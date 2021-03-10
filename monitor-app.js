@@ -144,6 +144,7 @@
     let body = document.getElementById("services");
     let frag = document.createDocumentFragment();
     let div = frag.appendChild(document.createElement("div"));
+    div.id = `s${service.id}`;
     div.appendChild(document.createElement("h2")).textContent = service.url;
     let anchor = div.appendChild(document.createElement("p"));
     anchor.innerHTML = "<a href='" + service.url + "/logs'>logs</a>"
@@ -153,6 +154,7 @@
     span.textContent = "OK";
     span.style = "color: white; font-weight: bold; padding: 0.5ex;"
     span.id = "service-" + service.id;
+    body.appendChild(frag);
     const tracks = [
       {
         title: `${service.name} (Heap)`,
@@ -165,9 +167,7 @@
         update: (usage) => [usage.GitHub.rate.limit-usage.GitHub.rate.remaining, usage.GitHub.rate.limit]
       });
     }
-    const g = new Graph("body", tracks);
-    service.graph = g;
-    body.appendChild(frag);
+    service.graph = new Graph(`div#${div.id}`, tracks);
   }
 
   let canNotify = (Notification.permission === "granted");
